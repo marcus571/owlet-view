@@ -21,7 +21,9 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "output.h"
 #include "profile.h"
 #include "screen.h"
-#include "animation.h"
+
+// 2026-11-06 修改：直接在 screen.c 里声明并绘制 Logo，不再依赖 animation.c
+LV_IMG_DECLARE(crystal_01);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -48,8 +50,10 @@ static void draw_right(lv_obj_t *widget, lv_color_t cbuf[], const struct status_
     lv_obj_t *canvas = lv_obj_get_child(widget, 1);
     fill_background(canvas);
 
-    // 绘制静态 Logo
-    draw_animation(canvas);
+    // 2026-11-06 修改：直接绘制 Logo
+    lv_obj_t *art = lv_img_create(canvas);
+    lv_img_set_src(art, &crystal_01);
+    lv_obj_align(art, LV_ALIGN_CENTER, 0, 0);
 
     // 旋转画布
     rotate_canvas(canvas, cbuf);
@@ -171,8 +175,6 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(left, widget->cbuf, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *right = lv_canvas_create(widget->obj);
-    // 第二个画布放在右侧偏移处。偏移多少呢？因为旋转了 270 度，原本的 X 轴变成了 Y 轴。
-    // 只需像原作者那样给一个偏移量即可。
     lv_obj_align(right, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_MIDDLE, 0);
     lv_canvas_set_buffer(right, widget->cbuf2, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
 
