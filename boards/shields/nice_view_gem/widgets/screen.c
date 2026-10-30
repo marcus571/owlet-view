@@ -22,8 +22,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "profile.h"
 #include "screen.h"
 
-// 2026-11-06 修改：直接在 screen.c 里声明并绘制 Logo，不再依赖 animation.c
-LV_IMG_DECLARE(crystal_01);
+// 2026-11-06 修改：改用 images.c 中确实存在的 profiles 作为占位 Logo
+LV_IMG_DECLARE(profiles);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -50,9 +50,9 @@ static void draw_right(lv_obj_t *widget, lv_color_t cbuf[], const struct status_
     lv_obj_t *canvas = lv_obj_get_child(widget, 1);
     fill_background(canvas);
 
-    // 2026-11-06 修改：直接绘制 Logo
+    // 2026-11-06 修改：绘制 profiles 图标作为占位
     lv_obj_t *art = lv_img_create(canvas);
-    lv_img_set_src(art, &crystal_01);
+    lv_img_set_src(art, &profiles);
     lv_obj_align(art, LV_ALIGN_CENTER, 0, 0);
 
     // 旋转画布
