@@ -1,8 +1,8 @@
 /*
  * layer.c
  * 2026-11-06 修改记录：
- *   1. Y 坐标退回安全的 32。
- *   2. 增加空字符串校验，防止 layer_label 为空导致不渲染。
+ *   1. 改为左对齐 (LV_TEXT_ALIGN_LEFT)，X=0，解决 L 靠右的问题。
+ *   2. Y 坐标下移到 45，拉开与第二行的距离。
  */
 #include <zephyr/kernel.h>
 #include <string.h>
@@ -11,7 +11,7 @@
 
 void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_dsc;
-    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &pixel_operator_mono, LV_TEXT_ALIGN_CENTER);
+    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &pixel_operator_mono, LV_TEXT_ALIGN_LEFT);
 
     char text[10] = {};
 
@@ -22,6 +22,6 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    // Y 坐标退回原版的安全值 32
-    lv_canvas_draw_text(canvas, 0, 32, 68, &label_dsc, text);
+    // X=0 左对齐，Y=45
+    lv_canvas_draw_text(canvas, 0, 45, 68, &label_dsc, text);
 }
