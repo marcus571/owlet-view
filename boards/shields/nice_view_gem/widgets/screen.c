@@ -22,7 +22,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "profile.h"
 #include "screen.h"
 
-// 2026-11-06 修改：改用 images.c 中确实存在的 profiles 作为占位 Logo
+// 2026-11-06 修改：使用 profiles 作为占位 Logo
 LV_IMG_DECLARE(profiles);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
@@ -31,7 +31,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
  * Draw buffers
  **/
 
-// 左侧画布：绘制电池、信号、层数
+// 左侧画布：绘制电池、信号、层数（不做旋转）
 static void draw_left(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
     fill_background(canvas);
@@ -40,23 +40,20 @@ static void draw_left(lv_obj_t *widget, lv_color_t cbuf[], const struct status_s
     draw_battery_status(canvas, state);
     draw_output_status(canvas, state);
     draw_layer_status(canvas, state);
-
-    // 旋转画布
-    rotate_canvas(canvas, cbuf);
+    
+    // 2026-11-06 修改：移除 rotate_canvas，保持横向
 }
 
-// 右侧画布：绘制静态 Logo
+// 右侧画布：绘制静态 Logo（不做旋转）
 static void draw_right(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 1);
     fill_background(canvas);
 
-    // 2026-11-06 修改：绘制 profiles 图标作为占位
     lv_obj_t *art = lv_img_create(canvas);
     lv_img_set_src(art, &profiles);
     lv_obj_align(art, LV_ALIGN_CENTER, 0, 0);
-
-    // 旋转画布
-    rotate_canvas(canvas, cbuf);
+    
+    // 2026-11-06 修改：移除 rotate_canvas，保持横向
 }
 
 /**
@@ -170,12 +167,14 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, SCREEN_HEIGHT, SCREEN_WIDTH);
 
+    // 左侧画布贴左
     lv_obj_t *left = lv_canvas_create(widget->obj);
-    lv_obj_align(left, LV_ALIGN_TOP_RIGHT, 0, 0);
+    lv_obj_align(left, LV_ALIGN_TOP_LEFT, 0, 0);
     lv_canvas_set_buffer(left, widget->cbuf, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
 
+    // 右侧画布贴右
     lv_obj_t *right = lv_canvas_create(widget->obj);
-    lv_obj_align(right, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_MIDDLE, 0);
+    lv_obj_align(right, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(right, widget->cbuf2, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     sys_slist_append(&widgets, &widget->node);
