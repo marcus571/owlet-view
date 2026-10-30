@@ -1,7 +1,7 @@
 /*
  * screen.c
  * 2026-11-06 修改记录：
- *   在初始化时强制调用 draw_left，确保开机瞬间三行内容全部画出来。
+ *   确保初始化时完整绘制左侧内容。
  */
 #include <zephyr/kernel.h>
 
@@ -150,7 +150,6 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget_layer_status_init();
     widget_output_status_init();
 
-    // 2026-11-06 关键修复：初始化时强制左右两边各画一次
     struct status_state initial_state = {0};
     initial_state.layer_index = 0;
     draw_left(widget->obj, widget->cbuf, &initial_state);
