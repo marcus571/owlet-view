@@ -1,7 +1,7 @@
 /*
  * layer.c
  * 2026-11-06 修改记录：
- *   将 Y 坐标设为 44，完全避开上方的 SIG 区域，确保不被遮挡。
+ *   Y 坐标定为 40，拉开与第二行的距离，确保完全在 68 像素内。
  */
 #include <zephyr/kernel.h>
 #include "layer.h"
@@ -20,6 +20,5 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    // Y 坐标设为 44
-    lv_canvas_draw_text(canvas, 0, 44, 68, &label_dsc, text);
+    lv_canvas_draw_text(canvas, 0, 40, 68, &label_dsc, text);
 }
