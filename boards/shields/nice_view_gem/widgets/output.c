@@ -1,9 +1,7 @@
 /*
  * output.c
- * 2026-11-06 修改记录：
- *   1. Y 坐标定为 26。
- *   2. SIG 宽度给足 28，防止换行。
- *   3. 图标从 X=28 开始，与上方数字对齐。
+ * 2026-11-06 终极计算版：
+ *   Y=22，绝对对齐。
  */
 #include <zephyr/kernel.h>
 #include "output.h"
@@ -18,32 +16,32 @@ LV_IMG_DECLARE(usb);
 static void draw_usb_connected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 28, 27, &usb, &img_dsc);
+    lv_canvas_draw_img(canvas, 28, 23, &usb, &img_dsc);
 }
 
 static void draw_ble_unbonded(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 28, 26, &bt_unbonded, &img_dsc);
+    lv_canvas_draw_img(canvas, 28, 22, &bt_unbonded, &img_dsc);
 }
 #endif
 
 static void draw_ble_disconnected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 28, 26, &bt_no_signal, &img_dsc);
+    lv_canvas_draw_img(canvas, 28, 22, &bt_no_signal, &img_dsc);
 }
 
 static void draw_ble_connected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 28, 26, &bt, &img_dsc);
+    lv_canvas_draw_img(canvas, 28, 22, &bt, &img_dsc);
 }
 
 void draw_output_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &pixel_operator_mono, LV_TEXT_ALIGN_LEFT);
-    lv_canvas_draw_text(canvas, 0, 26, 28, &label_dsc, "SIG");
+    lv_canvas_draw_text(canvas, 0, 22, 28, &label_dsc, "SIG");
 
 #if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
     switch (state->selected_endpoint.transport) {
