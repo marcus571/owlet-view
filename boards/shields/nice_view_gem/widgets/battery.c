@@ -1,8 +1,9 @@
 /*
  * battery.c
  * 2026-11-06 修改记录：
- *   1. 电量数字 X=22，左对齐。
- *   2. 充电图标定死在 X=58 的最右侧。
+ *   1. Y坐标定为 8。
+ *   2. BAT 宽度给足 28，防止换行。
+ *   3. 数字从 X=28 开始。闪电图标定在 X=52。
  */
 #include <zephyr/kernel.h>
 #include "battery.h"
@@ -17,7 +18,7 @@ static void draw_level(lv_obj_t *canvas, const struct status_state *state) {
     char text[10] = {};
 
     sprintf(text, "%i%%", state->battery);
-    lv_canvas_draw_text(canvas, 22, 0, 36, &label_right_dsc, text);
+    lv_canvas_draw_text(canvas, 28, 8, 20, &label_right_dsc, text);
 }
 
 static void draw_charging_level(lv_obj_t *canvas, const struct status_state *state) {
@@ -29,15 +30,15 @@ static void draw_charging_level(lv_obj_t *canvas, const struct status_state *sta
     char text[10] = {};
 
     sprintf(text, "%i%%", state->battery);
-    lv_canvas_draw_text(canvas, 22, 0, 36, &label_right_dsc, text);
-    // 闪电图标定在 X=58
-    lv_canvas_draw_img(canvas, 58, 1, &bolt, &img_dsc);
+    lv_canvas_draw_text(canvas, 28, 8, 20, &label_right_dsc, text);
+    // 闪电图标 Y=9 略微下移，使其与文字垂直居中对齐
+    lv_canvas_draw_img(canvas, 52, 9, &bolt, &img_dsc);
 }
 
 void draw_battery_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_left_dsc;
     init_label_dsc(&label_left_dsc, LVGL_FOREGROUND, &pixel_operator_mono, LV_TEXT_ALIGN_LEFT);
-    lv_canvas_draw_text(canvas, 0, 0, 22, &label_left_dsc, "BAT");
+    lv_canvas_draw_text(canvas, 0, 8, 28, &label_left_dsc, "BAT");
 
     if (state->charging) {
         draw_charging_level(canvas, state);
