@@ -1,3 +1,9 @@
+/*
+ * layer.c
+ * 2026-11-06 修改记录：
+ *   调整层数组件 Y 坐标，使其显示在屏幕底部。
+ *   去除了旧的 BUFFER_OFFSET_BOTTOM 偏移，直接固定在 Y=50。
+ */
 #include <zephyr/kernel.h>
 #include "layer.h"
 #include "../assets/custom_fonts.h"
@@ -15,5 +21,6 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    lv_canvas_draw_text(canvas, 0, 146 + BUFFER_OFFSET_BOTTOM, 68, &label_dsc, text);
+    // Y 坐标改为 50，固定在底部
+    lv_canvas_draw_text(canvas, 0, 50, 68, &label_dsc, text);
 }
