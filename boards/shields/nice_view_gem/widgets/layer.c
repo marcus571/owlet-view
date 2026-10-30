@@ -1,7 +1,7 @@
 /*
  * layer.c
  * 2026-11-06 修改记录：
- *   调整层数组件 Y 坐标到 48，防止文字被 68x68 的画布底部裁切。
+ *   将 Y 坐标从 48 改为安全的 36，避免被画布底部裁切。
  */
 #include <zephyr/kernel.h>
 #include "layer.h"
@@ -20,6 +20,6 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    // 将 Y 坐标设为 48，确保它在 68 像素高的画布内完全显示
-    lv_canvas_draw_text(canvas, 0, 48, 68, &label_dsc, text);
+    // Y 坐标设为 36（原版是 34），确保能画在 68x68 的画布内
+    lv_canvas_draw_text(canvas, 0, 36, 68, &label_dsc, text);
 }
