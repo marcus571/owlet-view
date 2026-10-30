@@ -1,8 +1,7 @@
 /*
  * layer.c
- * 2026-11-06 修改记录：
- *   1. 提示词改为 "LAY"，保持三字母对齐。
- *   2. Y 坐标下移到 50，保证整体三行间距分布均匀。
+ * 2026-11-06 终极计算版：
+ *   Y=45，字符改为 LAY，左对齐。
  */
 #include <zephyr/kernel.h>
 #include <string.h>
@@ -22,5 +21,5 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    lv_canvas_draw_text(canvas, 0, 50, 68, &label_dsc, text);
+    lv_canvas_draw_text(canvas, 0, 45, 68, &label_dsc, text);
 }
