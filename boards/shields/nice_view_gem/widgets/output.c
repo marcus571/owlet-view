@@ -1,9 +1,9 @@
 /*
  * output.c
  * 2026-11-06 修改记录：
- *   1. 删除了覆盖中间区域的黑色实心矩形。
- *   2. "SIG" 文本 X=0，宽度=25，防止换行。
- *   3. 所有图标 X=20，Y=20，紧贴 SIG 且居中。
+ *   1. 删除了遮挡文字的白色矩形背景。
+ *   2. "SIG" 宽度加大到 35，防止 G 换行。
+ *   3. 图标统一放在 X=30 的位置，紧贴 SIG 且绝不重叠。
  */
 #include <zephyr/kernel.h>
 #include "output.h"
@@ -18,33 +18,33 @@ LV_IMG_DECLARE(usb);
 static void draw_usb_connected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 20, 21, &usb, &img_dsc);
+    lv_canvas_draw_img(canvas, 30, 21, &usb, &img_dsc);
 }
 
 static void draw_ble_unbonded(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 20, 20, &bt_unbonded, &img_dsc);
+    lv_canvas_draw_img(canvas, 30, 20, &bt_unbonded, &img_dsc);
 }
 #endif
 
 static void draw_ble_disconnected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 20, 20, &bt_no_signal, &img_dsc);
+    lv_canvas_draw_img(canvas, 30, 20, &bt_no_signal, &img_dsc);
 }
 
 static void draw_ble_connected(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 20, 20, &bt, &img_dsc);
+    lv_canvas_draw_img(canvas, 30, 20, &bt, &img_dsc);
 }
 
 void draw_output_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &pixel_operator_mono, LV_TEXT_ALIGN_LEFT);
-    // X=0, Y=20，宽度给足 30
-    lv_canvas_draw_text(canvas, 0, 20, 30, &label_dsc, "SIG");
+    // 宽度加大到 35，防止 G 被挤换行
+    lv_canvas_draw_text(canvas, 0, 20, 35, &label_dsc, "SIG");
 
 #if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
     switch (state->selected_endpoint.transport) {
