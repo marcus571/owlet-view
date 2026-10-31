@@ -65,11 +65,11 @@ const lv_img_dsc_t bt_no_signal = {
 const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BT_UNBONDED uint8_t
     bt_unbonded_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
-        0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
-        0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-#else
         0x00, 0x00, 0x00, 0xff, /*Color of index 0*/
         0xff, 0xff, 0xff, 0xff, /*Color of index 1*/
+#else
+        0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
+        0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
 #endif
 
         0x00, 0x20, 0x00, 0x00, 0x30, 0x00, 0x00, 0x38, 0x00, 0x21, 0x2c, 0x10, 0x41, 0xa6, 0x08,
@@ -86,7 +86,7 @@ const lv_img_dsc_t bt_unbonded = {
     .data = bt_unbonded_map,
 };
 
-/* ==================== USB 图标 (原版) ==================== */
+/* ==================== USB 图标 (已修正反相) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_USB
 #define LV_ATTRIBUTE_IMG_USB
 #endif
