@@ -1,7 +1,7 @@
 /*
  * layer.c
  * 2026-10-31 修改记录：
- *   整体上移 1 像素，Y=52。
+ *   整体上移 1 像素，Y=51。
  */
 #include <zephyr/kernel.h>
 #include <string.h>
@@ -20,5 +20,5 @@ void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
         to_uppercase(text);
     }
 
-    lv_canvas_draw_text(canvas, 0, 52, 68, &label_dsc, text);
+    lv_canvas_draw_text(canvas, 0, 51, 68, &label_dsc, text);
 }
