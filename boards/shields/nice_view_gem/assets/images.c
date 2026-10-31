@@ -4,7 +4,7 @@
 #define LV_ATTRIBUTE_MEM_ALIGN
 #endif
 
-/* ==================== 蓝牙图标 ==================== */
+/* ==================== 蓝牙图标 (0为线条，Index 0为白) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BT
 #define LV_ATTRIBUTE_IMG_BT
 #endif
@@ -86,7 +86,7 @@ const lv_img_dsc_t bt_unbonded = {
     .data = bt_unbonded_map,
 };
 
-/* ==================== USB 图标 ==================== */
+/* ==================== USB 图标 (0为线条，Index 0为白) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_USB
 #define LV_ATTRIBUTE_IMG_USB
 #endif
@@ -114,18 +114,18 @@ const lv_img_dsc_t usb = {
     .data = usb_map,
 };
 
-/* ==================== 电池闪电 ==================== */
+/* ==================== 电池闪电 (1为线条，Index 0为黑) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BOLT
 #define LV_ATTRIBUTE_IMG_BOLT
 #endif
 
 const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BOLT uint8_t bolt_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
-    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
-    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-#else
     0x00, 0x00, 0x00, 0xff, /*Color of index 0*/
     0xff, 0xff, 0xff, 0xff, /*Color of index 1*/
+#else
+    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
+    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
 #endif
 
     0x08, 0x10, 0x20, 0x40, 0xf8, 0x10, 0x20, 0x40, 0x80,
@@ -140,7 +140,7 @@ const lv_img_dsc_t bolt = {
     .data = bolt_map,
 };
 
-/* ==================== Profile 指示点 ==================== */
+/* ==================== Profile 指示点 (1为线条，Index 0为黑) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_PROFILES
 #define LV_ATTRIBUTE_IMG_PROFILES
 #endif
@@ -148,11 +148,11 @@ const lv_img_dsc_t bolt = {
 const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_PROFILES uint8_t
     profiles_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
-    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
-    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-#else
     0x00, 0x00, 0x00, 0xff, /*Color of index 0*/
     0xff, 0xff, 0xff, 0xff, /*Color of index 1*/
+#else
+    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
+    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
 #endif
 
         0xa1, 0x42, 0x85, 0x0a, 0x00, 0x00, 0x00, 0x00, 0xa1, 0x42, 0x85, 0x0a,
@@ -167,18 +167,18 @@ const lv_img_dsc_t profiles = {
     .data = profiles_map,
 };
 
-/* ==================== 专属 Logo (56x41) ==================== */
+/* ==================== 专属 Logo (1为线条，Index 0为黑) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_OWL
 #define LV_ATTRIBUTE_IMG_OWL
 #endif
 
 const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_OWL uint8_t owl_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
-    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
-    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-#else
     0x00, 0x00, 0x00, 0xff, /*Color of index 0*/
     0xff, 0xff, 0xff, 0xff, /*Color of index 1*/
+#else
+    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
+    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
 #endif
 
   0x00, 0x00, 0x01, 0xff, 0x80, 0x00, 0x00, 
