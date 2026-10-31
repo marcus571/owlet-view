@@ -1,7 +1,7 @@
 /*
  * screen.c
  * 2026-11-06 修改记录：
- *   在初始化时强制调用 draw_left，确保开机瞬间三行内容全部画出来。
+ *   将右侧的 profiles 占位图替换为专属 Logo (owl)。
  */
 #include <zephyr/kernel.h>
 
@@ -27,7 +27,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "profile.h"
 #include "screen.h"
 
-LV_IMG_DECLARE(profiles);
+// 2026-11-06 修改：声明专属 Logo
+LV_IMG_DECLARE(owl);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -44,8 +45,9 @@ static void draw_right(lv_obj_t *widget, lv_color_t cbuf[], const struct status_
     lv_obj_t *canvas = lv_obj_get_child(widget, 1);
     fill_background(canvas);
 
+    // 2026-11-06 修改：绘制专属 Logo
     lv_obj_t *art = lv_img_create(canvas);
-    lv_img_set_src(art, &profiles);
+    lv_img_set_src(art, &owl);
     lv_obj_align(art, LV_ALIGN_CENTER, 0, 0);
 }
 
