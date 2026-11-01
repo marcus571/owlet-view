@@ -2,9 +2,10 @@
 # nice_view_gem CMakeLists.txt
 # 路径：boards/shields/nice_view_gem/CMakeLists.txt
 #
-# 2026-11-06 修正版：
-#   使用 target_sources(app PRIVATE ...) 以正确继承 ZMK 的 include 路径。
-#   只编译当前 UI 需要的 .c 文件，原版废弃的 wpm.c、profile.c 等不参与编译。
+# 2026-11-06 最终修正版：
+#   1. 使用 target_sources(app PRIVATE ...) 继承 ZMK 头文件。
+#   2. 加入真实存在的字体文件 pixel_operator_mono.c。
+#   3. 丢弃废弃的 wpm/profile 等文件。
 # ============================================================
 
 if(CONFIG_ZMK_DISPLAY)
@@ -15,5 +16,6 @@ if(CONFIG_ZMK_DISPLAY)
     widgets/layer.c
     widgets/util.c
     assets/images.c
+    assets/pixel_operator_mono.c
   )
 endif()
