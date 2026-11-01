@@ -1,19 +1,16 @@
-if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
-  zephyr_library_include_directories(${CMAKE_SOURCE_DIR}/include)
-  zephyr_library_sources(custom_status_screen.c)
-  zephyr_library_sources(assets/images.c)
-  zephyr_library_sources(widgets/battery.c)
-  zephyr_library_sources(widgets/output.c)
-  zephyr_library_sources(widgets/util.c)
-  
-  if(NOT CONFIG_ZMK_SPLIT OR CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
-  zephyr_library_sources(widgets/layer.c)
-  zephyr_library_sources(widgets/profile.c)
-  zephyr_library_sources(widgets/screen.c)
-  zephyr_library_sources(widgets/wpm.c)
-  else()
-    zephyr_library_sources(assets/crystal.c)
-    zephyr_library_sources(widgets/animation.c)
-    zephyr_library_sources(widgets/screen_peripheral.c)
-  endif()
-endif()
+# ============================================================
+# nice_view_gem CMakeLists.txt
+#
+# 2026-11-06 瘦身版：
+#   移除了 wpm.c, profile.c, animation.c, screen_peripheral.c
+# ============================================================
+
+zephyr_library_sources_ifdef(CONFIG_ZMK_DISPLAY
+    widgets/screen.c
+    widgets/battery.c
+    widgets/output.c
+    widgets/layer.c
+    widgets/util.c
+    assets/images.c
+    assets/custom_fonts.c
+)
