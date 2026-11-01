@@ -4,7 +4,7 @@
 #define LV_ATTRIBUTE_MEM_ALIGN
 #endif
 
-/* ==================== 蓝牙图标 (0为线条，Index 0为白) ==================== */
+/* ==================== 蓝牙已连接 ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BT
 #define LV_ATTRIBUTE_IMG_BT
 #endif
@@ -31,6 +31,7 @@ const lv_img_dsc_t bt = {
     .data = bt_map,
 };
 
+/* ==================== 蓝牙未连接 (无信号) ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BT_NO_SIGNAL
 #define LV_ATTRIBUTE_IMG_BT_NO_SIGNAL
 #endif
@@ -58,6 +59,7 @@ const lv_img_dsc_t bt_no_signal = {
     .data = bt_no_signal_map,
 };
 
+/* ==================== 蓝牙未配对 ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BT_UNBONDED
 #define LV_ATTRIBUTE_IMG_BT_UNBONDED
 #endif
@@ -86,7 +88,7 @@ const lv_img_dsc_t bt_unbonded = {
     .data = bt_unbonded_map,
 };
 
-/* ==================== USB 图标 (0为线条，Index 0为白) ==================== */
+/* ==================== USB 图标 ==================== */
 #ifndef LV_ATTRIBUTE_IMG_USB
 #define LV_ATTRIBUTE_IMG_USB
 #endif
@@ -114,7 +116,7 @@ const lv_img_dsc_t usb = {
     .data = usb_map,
 };
 
-/* ==================== 电池闪电 (1为线条，Index 0为黑) ==================== */
+/* ==================== 电池闪电 ==================== */
 #ifndef LV_ATTRIBUTE_IMG_BOLT
 #define LV_ATTRIBUTE_IMG_BOLT
 #endif
@@ -140,34 +142,7 @@ const lv_img_dsc_t bolt = {
     .data = bolt_map,
 };
 
-/* ==================== Profile 指示点 (1为线条，Index 0为黑) ==================== */
-#ifndef LV_ATTRIBUTE_IMG_PROFILES
-#define LV_ATTRIBUTE_IMG_PROFILES
-#endif
-
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_PROFILES uint8_t
-    profiles_map[] = {
-#if CONFIG_NICE_VIEW_WIDGET_INVERTED
-    0x00, 0x00, 0x00, 0xff, /*Color of index 0*/
-    0xff, 0xff, 0xff, 0xff, /*Color of index 1*/
-#else
-    0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
-    0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
-#endif
-
-        0xa1, 0x42, 0x85, 0x0a, 0x00, 0x00, 0x00, 0x00, 0xa1, 0x42, 0x85, 0x0a,
-};
-
-const lv_img_dsc_t profiles = {
-    .header.cf = LV_IMG_CF_INDEXED_1BIT,
-    .header.always_zero = 0,
-    .header.w = 31,
-    .header.h = 3,
-    .data_size = 20,
-    .data = profiles_map,
-};
-
-/* ==================== 专属 Logo (1为线条，Index 0为黑) ==================== */
+/* ==================== 专属 Logo ==================== */
 #ifndef LV_ATTRIBUTE_IMG_OWL
 #define LV_ATTRIBUTE_IMG_OWL
 #endif
